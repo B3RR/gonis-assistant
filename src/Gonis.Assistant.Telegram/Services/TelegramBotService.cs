@@ -65,11 +65,14 @@ namespace Gonis.Assistant.Telegram.Services
                 throw new ArgumentNullException(nameof(sender));
             }
 
-            var msg = e.Message;
-            if (!string.IsNullOrWhiteSpace(msg.Text))
+            var msg = e?.Message;
+            if (msg != null)
             {
-                var text = string.Join(string.Empty, msg.Text.Reverse());
-                await _botClient.SendTextMessageAsync(msg.Chat.Id, text, replyToMessageId: msg.MessageId);
+                if (!string.IsNullOrWhiteSpace(msg.Text))
+                {
+                    var text = string.Join(string.Empty, msg.Text.Reverse());
+                    await _botClient.SendTextMessageAsync(msg.Chat.Id, text, replyToMessageId: msg.MessageId);
+                }
             }
         }
     }
