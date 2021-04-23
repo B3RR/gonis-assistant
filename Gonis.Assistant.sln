@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gonis.Assistant.Core", "src\Gonis.Assistant.Core\Gonis.Assistant.Core.csproj", "{1B76D626-5DEB-419A-81E5-629027FFDAC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gonis.Assistant.Blazor", "src\Gonis.Assistant.Blazor\Gonis.Assistant.Blazor.csproj", "{32869D62-16F5-45C4-8FA0-D9F4BD89B35E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gonis.Assistant.Telegram", "src\Gonis.Assistant.Telegram\Gonis.Assistant.Telegram.csproj", "{B72115CF-A8D3-48C7-A977-00B7BC270DA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7057781-7C3D-4D22-957F-F09D48CA49AE}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B76D626-5DEB-419A-81E5-629027FFDAC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B76D626-5DEB-419A-81E5-629027FFDAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B76D626-5DEB-419A-81E5-629027FFDAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B76D626-5DEB-419A-81E5-629027FFDAC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32869D62-16F5-45C4-8FA0-D9F4BD89B35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32869D62-16F5-45C4-8FA0-D9F4BD89B35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32869D62-16F5-45C4-8FA0-D9F4BD89B35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32869D62-16F5-45C4-8FA0-D9F4BD89B35E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B72115CF-A8D3-48C7-A977-00B7BC270DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72115CF-A8D3-48C7-A977-00B7BC270DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72115CF-A8D3-48C7-A977-00B7BC270DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72115CF-A8D3-48C7-A977-00B7BC270DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87500C02-78B5-40C1-9AF5-0B7AF1C07276}
+	EndGlobalSection
+EndGlobal

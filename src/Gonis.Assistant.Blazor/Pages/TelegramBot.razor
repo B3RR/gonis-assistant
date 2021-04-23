@@ -1,0 +1,55 @@
+﻿@page "/telegrambot"
+
+@using Gonis.Assistant.Core.Bots.Interfaces
+@using Gonis.Assistant.Blazor.Errors
+@inject IBotService TelegramBotService
+
+<h1>Telegram Bot</h1>
+
+@if (TelegramBotService.IsStarted)
+{
+    <p>Status: <span class="badge badge-success">On</span></p>
+}
+else
+{
+    <p>Status: <span class="badge badge-danger">Off</span></p>
+}
+<p>Link: <a href="https://t.me/GonisBot">t.me/GonisBot</a></p>
+<button class="btn btn-primary" @onclick="Start">Start</button>
+<button class="btn btn-primary" @onclick="Stop">Stop</button>
+
+@code {
+    [CascadingParameter(Name = "ErrorComponent")]
+    protected IErrorComponent ErrorComponent { get; set; }
+
+    private string GetStatus()
+    {
+        return TelegramBotService.IsStarted ? "On" : "Off";
+    }
+
+    private void Start()
+    {
+        try
+        {
+            ErrorComponent.HideError();
+            TelegramBotService.Start();
+        }
+        catch (Exception exc)
+        {
+            ErrorComponent.ShowError("Telegram Bot Error", exc.Message);
+        }
+    }
+
+    private void Stop()
+    {
+        try
+        {
+            ErrorComponent.HideError();
+            TelegramBotService.Stop();
+        }
+        catch (Exception exc)
+        {
+            ErrorComponent.ShowError("Telegram Bot Error", exc.Message);
+        }
+    }
+}

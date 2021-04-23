@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>6a8009c3-e8c4-4d44-8360-6035c4611bd7</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Gonis.StyleCop" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gonis.Assistant.Core\Gonis.Assistant.Core.csproj" />
+    <ProjectReference Include="..\Gonis.Assistant.Telegram\Gonis.Assistant.Telegram.csproj" />
+  </ItemGroup>
+
+</Project>
