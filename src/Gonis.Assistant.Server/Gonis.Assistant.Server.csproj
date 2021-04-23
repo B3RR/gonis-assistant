@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>6a8009c3-e8c4-4d44-8360-6035c4611bd7</UserSecretsId>
+    <AssemblyName>Gonis.Assistant.Server</AssemblyName>
+    <RootNamespace>Gonis.Assistant.Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Gonis.Assistant.Blazor
+namespace Gonis.Assistant.Server
 {
     public class Program
     {

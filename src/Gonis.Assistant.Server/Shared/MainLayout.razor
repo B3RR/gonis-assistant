@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@implements Gonis.Assistant.Blazor.Errors.IErrorComponent
+@implements Gonis.Assistant.Server.Interfaces.IErrorComponent
 
 <div class="page">
     <div class="sidebar">
@@ -16,13 +16,13 @@
         <div class="content px-4">
             @if (_isErrorActive)
             {
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" @onclick="HideError">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3>@_title</h3>
-                    <p>@_message</p>
-                </div>
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" @onclick="HideError">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3>@_title</h3>
+                <p>@_message</p>
+            </div>
             }
             <CascadingValue Value="this" Name="ErrorComponent">
                 @Body
