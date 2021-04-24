@@ -7,13 +7,25 @@ using System.Threading.Tasks;
 namespace Gonis.Assistant.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TestController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async IAsyncEnumerable<string> GetAsync()
         {
-            return new List<string>() { "One", "Two", "Four" };
+            await foreach (var number in GetNumbersAsync())
+            {
+                yield return $"Step - {number}";
+            }
+        }
+
+        private async IAsyncEnumerable<int> GetNumbersAsync()
+        {
+            for (var i = 1; i <= 5; i++)
+            {
+                await Task.Delay(100);
+                yield return i;
+            }
         }
     }
 }
