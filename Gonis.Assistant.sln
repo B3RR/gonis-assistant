@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gonis.Assistant.Core", "src\Gonis.Assistant.Core\Gonis.Assistant.Core.csproj", "{1B76D626-5DEB-419A-81E5-629027FFDAC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gonis.Assistant.Blazor", "src\Gonis.Assistant.Blazor\Gonis.Assistant.Blazor.csproj", "{32869D62-16F5-45C4-8FA0-D9F4BD89B35E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gonis.Assistant.Server", "src\Gonis.Assistant.Server\Gonis.Assistant.Server.csproj", "{32869D62-16F5-45C4-8FA0-D9F4BD89B35E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gonis.Assistant.Telegram", "src\Gonis.Assistant.Telegram\Gonis.Assistant.Telegram.csproj", "{B72115CF-A8D3-48C7-A977-00B7BC270DA3}"
 EndProject

@@ -1,18 +1,18 @@
 ﻿@page "/telegrambot"
 
 @using Gonis.Assistant.Core.Bots.Interfaces
-@using Gonis.Assistant.Blazor.Errors
+@using Gonis.Assistant.Server.Interfaces
 @inject IBotService TelegramBotService
 
 <h1>Telegram Bot</h1>
 
 @if (TelegramBotService.IsStarted)
 {
-    <p>Status: <span class="badge badge-success">On</span></p>
+<p>Status: <span class="badge badge-success">On</span></p>
 }
 else
 {
-    <p>Status: <span class="badge badge-danger">Off</span></p>
+<p>Status: <span class="badge badge-danger">Off</span></p>
 }
 <p>Link: <a href="https://t.me/GonisBot">t.me/GonisBot</a></p>
 <button class="btn btn-primary" @onclick="Start">Start</button>

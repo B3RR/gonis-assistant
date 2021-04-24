@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Gonis.Assistant.Blazor": {
+    "Gonis.Assistant.Server": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

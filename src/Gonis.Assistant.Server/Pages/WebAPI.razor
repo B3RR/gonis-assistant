@@ -1,0 +1,47 @@
+﻿@page "/webapi"
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@inject HttpClient HttpClient
+@inject IHttpContextAccessor httpContextAccessor
+
+
+<h1>WebAPI</h1>
+
+
+<p>
+    <button class="btn btn-primary" @onclick="GetStepsAsync">Call</button>
+    <button class="btn btn-primary" @onclick="Clear">Clear</button>
+</p>
+
+<p>
+    <ul>
+        @foreach (var step in _steps)
+        {
+            <li>@step</li>
+        }
+    </ul>
+</p>
+@code
+{
+    private IEnumerable<string> _steps = new List<string>();
+
+    private void Clear()
+    {
+        _steps = new List<string>();
+    }
+
+    private async Task GetStepsAsync()
+    {
+        //shit code
+        var http = httpContextAccessor.HttpContext.Request.IsHttps ? "https" : "http";
+        var host = $"{http}://{httpContextAccessor.HttpContext.Request.Host.ToString()}/";
+
+        if (HttpClient.BaseAddress == null)
+        {
+            HttpClient.BaseAddress = new Uri(host);
+        }
+
+        _steps = await HttpClient.GetFromJsonAsync<IEnumerable<string>>("api/test");
+    }
+}
