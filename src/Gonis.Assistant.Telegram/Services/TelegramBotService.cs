@@ -18,6 +18,7 @@ namespace Gonis.Assistant.Telegram.Services
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             var token = _configuration
                 .GetSection(ConfigurationConstants.BotsSection)
+                .GetSection(ConfigurationConstants.TelegramBotSection)
                 .GetChildren()
                 .FirstOrDefault(x => x.Key == ConfigurationConstants.TelegramBotToken)
                 ?.Value;
@@ -26,11 +27,27 @@ namespace Gonis.Assistant.Telegram.Services
                 throw new ArgumentNullException("Telegram Bot token is empty.");
             }
 
+            var botName = _configuration
+                .GetSection(ConfigurationConstants.BotsSection)
+                .GetSection(ConfigurationConstants.TelegramBotSection)
+                .GetChildren()
+                .FirstOrDefault(x => x.Key == ConfigurationConstants.TelegramBotName)
+                ?.Value;
+
+            if (string.IsNullOrWhiteSpace(botName))
+            {
+                throw new ArgumentNullException("Telegram Bot Name is empty.");
+            }
+
+            Name = botName;
+
             _botClient = new TelegramBotClient(token);
             _botClient.OnMessage += OnMessageHandler;
         }
 
         public bool IsStarted { get; private set; }
+
+        public string Name { get; private set; }
 
         public void Start()
         {

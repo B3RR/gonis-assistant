@@ -14,7 +14,7 @@ else
 {
 <p>Status: <span class="badge badge-danger">Off</span></p>
 }
-<p>Link: <a href="https://t.me/GonisBot">t.me/GonisBot</a></p>
+<p>Link: <a href="https://@GetLink()">@GetLink()</a></p>
 <button class="btn btn-primary" @onclick="Start">Start</button>
 <button class="btn btn-primary" @onclick="Stop">Stop</button>
 
@@ -22,9 +22,9 @@ else
     [CascadingParameter(Name = "ErrorComponent")]
     protected IErrorComponent ErrorComponent { get; set; }
 
-    private string GetStatus()
+    private string GetLink()
     {
-        return TelegramBotService.IsStarted ? "On" : "Off";
+        return $"t.me/{TelegramBotService.Name}";
     }
 
     private void Start()

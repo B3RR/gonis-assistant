@@ -1,9 +1,6 @@
 ﻿@page "/webapi"
 @using System.Net.Http.Json
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Http.Extensions
 @inject HttpClient HttpClient
-@inject IHttpContextAccessor httpContextAccessor
 
 
 <h1>WebAPI</h1>
@@ -33,15 +30,6 @@
 
     private async Task GetStepsAsync()
     {
-        //shit code
-        var http = httpContextAccessor.HttpContext.Request.IsHttps ? "https" : "http";
-        var host = $"{http}://{httpContextAccessor.HttpContext.Request.Host.ToString()}/";
-
-        if (HttpClient.BaseAddress == null)
-        {
-            HttpClient.BaseAddress = new Uri(host);
-        }
-
-        _steps = await HttpClient.GetFromJsonAsync<IEnumerable<string>>("api/test");
+        _steps = await HttpClient.GetFromJsonAsync<IEnumerable<string>>("test");
     }
 }

@@ -13,6 +13,8 @@ namespace Gonis.Assistant.Core.Bots.Interfaces
     {
         bool IsStarted { get; }
 
+        string Name { get; }
+
         /// <summary>
         /// Start bot
         /// </summary>
