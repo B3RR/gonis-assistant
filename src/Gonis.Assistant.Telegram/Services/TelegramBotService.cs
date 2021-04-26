@@ -1,6 +1,6 @@
 ﻿using Gonis.Assistant.Core.Bots.Interfaces;
-using Gonis.Assistant.Core.Constants;
-using Microsoft.Extensions.Configuration;
+using Gonis.Assistant.Telegram.Options;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using Telegram.Bot;
@@ -11,28 +11,18 @@ namespace Gonis.Assistant.Telegram.Services
     public class TelegramBotService : IBotService
     {
         private readonly TelegramBotClient _botClient;
-        private readonly IConfiguration _configuration;
+        private readonly TelegramBotOptions _telegramBotOptions;
 
-        public TelegramBotService(IConfiguration configuration)
+        public TelegramBotService(IOptions<TelegramBotOptions> telegramBotOptions)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            var token = _configuration
-                .GetSection(ConfigurationConstants.BotsSection)
-                .GetSection(ConfigurationConstants.TelegramBotSection)
-                .GetChildren()
-                .FirstOrDefault(x => x.Key == ConfigurationConstants.TelegramBotToken)
-                ?.Value;
+            _telegramBotOptions = telegramBotOptions?.Value ?? throw new ArgumentNullException(nameof(telegramBotOptions));
+            var token = _telegramBotOptions.Token;
             if (string.IsNullOrWhiteSpace(token))
             {
                 throw new ArgumentNullException("Telegram Bot token is empty.");
             }
 
-            var botName = _configuration
-                .GetSection(ConfigurationConstants.BotsSection)
-                .GetSection(ConfigurationConstants.TelegramBotSection)
-                .GetChildren()
-                .FirstOrDefault(x => x.Key == ConfigurationConstants.TelegramBotName)
-                ?.Value;
+            var botName = _telegramBotOptions.Name;
 
             if (string.IsNullOrWhiteSpace(botName))
             {

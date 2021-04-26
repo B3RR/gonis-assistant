@@ -8,8 +8,13 @@ namespace Gonis.Assistant.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiVersion("1.1")]
     public class TestController : ControllerBase
     {
+        /// <summary>
+        /// Получение файла по ID договора
+        /// </summary>
+        /// <returns>Список</returns>
         [HttpGet]
         public async IAsyncEnumerable<string> GetAsync()
         {
