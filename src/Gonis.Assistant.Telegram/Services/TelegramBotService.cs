@@ -42,7 +42,7 @@ namespace Gonis.Assistant.Telegram.Services
             Name = botName;
 
             _botClient = new TelegramBotClient(token);
-            _botClient.OnMessage += OnMessageHandler;
+            _botClient.OnMessage += OnMessageHandlerAsync;
         }
 
         public bool IsStarted { get; private set; }
@@ -75,7 +75,7 @@ namespace Gonis.Assistant.Telegram.Services
             }
         }
 
-        private async void OnMessageHandler(object? sender, MessageEventArgs e)
+        private async void OnMessageHandlerAsync(object? sender, MessageEventArgs e)
         {
             if (sender == null)
             {
