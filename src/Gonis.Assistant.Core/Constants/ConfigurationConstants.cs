@@ -3,16 +3,10 @@
     public class ConfigurationConstants
     {
         // Sections
-        public const string MainSection = "main";
+        public const string MainSection = "Main";
+        public const string WebApiEndpoint = "WebApiEndpoint";
 
-        // Keys
-        public const string WebApiEndpoint = "webApiEndpoint";
-
-        public const string BotsSection = "bots";
-
-        // Telegram Bot
-        public const string TelegramBotSection = "telegramBot";
-        public const string TelegramBotName = "telegramBotName";
-        public const string TelegramBotToken = "telegramBotToken";
+        public const string BotsSection = "Bots";
+        public const string TelegramBotSection = "TelegramBot";
     }
 }
