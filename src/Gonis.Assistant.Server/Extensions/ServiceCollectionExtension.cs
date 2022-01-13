@@ -45,7 +45,7 @@ namespace Gonis.Assistant.Server.Extensions
 
         public static IServiceCollection AddLogger(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<ILogger>(x => new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger());
+            services.AddSingleton<Serilog.ILogger>(x => new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger());
             return services;
         }
 

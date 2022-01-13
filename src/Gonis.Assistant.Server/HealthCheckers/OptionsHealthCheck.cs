@@ -11,11 +11,11 @@ namespace Gonis.Assistant.Server.HealthCheckers
 {
     public class OptionsHealthCheck : IHealthCheck
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly TelegramBotOptions _telegramBotOptions;
 
         public OptionsHealthCheck(
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             IOptions<TelegramBotOptions> telegramBotOptions)
         {
             _env = env;
