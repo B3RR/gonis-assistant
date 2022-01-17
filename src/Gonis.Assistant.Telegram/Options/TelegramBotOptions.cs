@@ -11,5 +11,6 @@ namespace Gonis.Assistant.Telegram.Options
         public string Name { get; set; }
 
         public string Token { get; set; }
+        public string ErrorsChatId { get; set; }
     }
 }

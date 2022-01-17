@@ -15,10 +15,10 @@ namespace Gonis.Assistant.Server.HealthCheckers
         private readonly TelegramBotOptions _telegramBotOptions;
 
         public OptionsHealthCheck(
-            IWebHostEnvironment env,
+            IWebHostEnvironment? env,
             IOptions<TelegramBotOptions> telegramBotOptions)
         {
-            _env = env;
+            _env = env ?? throw new ArgumentNullException(nameof(env));
             _telegramBotOptions = telegramBotOptions?.Value;
         }
 
