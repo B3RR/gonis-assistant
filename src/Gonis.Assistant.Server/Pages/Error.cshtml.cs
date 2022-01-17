@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,11 +12,11 @@ namespace Gonis.Assistant.Server.Pages
     [IgnoreAntiforgeryToken]
     public class ErrorModel : PageModel
     {
-        private readonly ILogger<ErrorModel> _logger;
+        private readonly Serilog.ILogger _logger;
 
-        public ErrorModel(ILogger<ErrorModel> logger)
+        public ErrorModel(Serilog.ILogger logger)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public string RequestId { get; set; }
