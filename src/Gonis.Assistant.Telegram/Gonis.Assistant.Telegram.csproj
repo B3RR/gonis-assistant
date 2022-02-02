@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Gonis.Assistant.Core\Gonis.Assistant.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
 </Project>

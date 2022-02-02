@@ -1,4 +1,6 @@
 ﻿using Gonis.Assistant.Core.Bots.Interfaces;
+using Gonis.Assistant.Telegram.Handlers;
+using Gonis.Assistant.Telegram.Interfaces;
 using Gonis.Assistant.Telegram.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +18,7 @@ namespace Gonis.Assistant.Telegram
         /// <returns>IServiceCollection with singleton </returns>
         public static IServiceCollection AddTelegramBot(this IServiceCollection services)
         {
+            services.AddSingleton<IHandlerService, HandlerService>();
             services.AddSingleton<IBotService, TelegramBotService>();
             return services;
         }
