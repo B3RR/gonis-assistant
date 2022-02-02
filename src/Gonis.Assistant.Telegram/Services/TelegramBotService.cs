@@ -1,4 +1,5 @@
 ﻿using Gonis.Assistant.Core.Bots.Interfaces;
+using Gonis.Assistant.Telegram.Interfaces;
 using Gonis.Assistant.Telegram.Options;
 using Microsoft.Extensions.Options;
 using System;
@@ -18,11 +19,12 @@ namespace Gonis.Assistant.Telegram.Services
     {
         private readonly TelegramBotClient _botClient;
         private readonly TelegramBotOptions _telegramBotOptions;
-        private readonly string _errorChatId;
+        private readonly IHandlerService _handlerService;
         private CancellationTokenSource _cts;
 
-        public TelegramBotService(IOptions<TelegramBotOptions> telegramBotOptions)
+        public TelegramBotService(IHandlerService handlerService, IOptions<TelegramBotOptions> telegramBotOptions)
         {
+            _handlerService = handlerService ?? throw new ArgumentNullException(nameof(handlerService));
             _telegramBotOptions = telegramBotOptions?.Value ?? throw new ArgumentNullException(nameof(telegramBotOptions));
             var token = _telegramBotOptions.Token;
             if (string.IsNullOrWhiteSpace(token))
@@ -37,12 +39,6 @@ namespace Gonis.Assistant.Telegram.Services
                 throw new ArgumentNullException("Telegram Bot Name is empty.");
             }
 
-            if (string.IsNullOrWhiteSpace(_telegramBotOptions?.ErrorsChatId))
-            {
-                throw new ArgumentNullException("Telegram Error Chat Id is empty.");
-            }
-
-            _errorChatId = _telegramBotOptions.ErrorsChatId;
             Name = botName;
 
             _botClient = new TelegramBotClient(token);
@@ -62,8 +58,8 @@ namespace Gonis.Assistant.Telegram.Services
                 };
                 _cts = new CancellationTokenSource();
                 _botClient.StartReceiving(
-                    HandleUpdateAsync,
-                    HandleErrorAsync,
+                    _handlerService.UpdateHandlerAsync,
+                    _handlerService.ErrorHandlerAsync,
                     receiverOptions,
                     cancellationToken: _cts.Token);
                 IsStarted = true;
@@ -82,8 +78,8 @@ namespace Gonis.Assistant.Telegram.Services
                 {
                     _cts.Cancel();
                     _cts.Dispose();
-                    IsStarted = false;
                 }
+                IsStarted = false;
             }
             else
             {
@@ -91,75 +87,8 @@ namespace Gonis.Assistant.Telegram.Services
             }
         }
 
-        private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        {
-            if (update.Type != UpdateType.Message)
-            {
-                return;
-            }
 
-            if (update.Message!.Type != MessageType.Text)
-            {
-                return;
-            }
 
-            var chatId = update.Message.Chat.Id;
-            var messageText = update.Message.Text;
-            var userInfo = string.Join(" ", update.Message.Chat.Id,
-                update.Message.Chat.FirstName ?? "FirstName",
-                update.Message.Chat.LastName ?? "LastName",
-                $"@{update.Message.Chat.Username}{Environment.NewLine}");
-
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(messageText))
-                {
-                    if (messageText.Equals("error"))
-                    {
-                        throw new Exception($"{userInfo}Test error!");
-                    }
-                    else
-                    {
-                        await botClient.SendTextMessageAsync(
-                            chatId: chatId,
-                            text: $"{messageText}",
-                            cancellationToken: cancellationToken);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await HandleErrorAsync(botClient, ex, cancellationToken);
-            }
-        }
-
-        private Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
-        {
-            try
-            {
-                var errorMessage = exception switch
-                {
-                    ApiRequestException apiRequestException
-                        => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
-                    _ => exception.ToString()
-                };
-                if (IsStarted)
-                {
-                    botClient.SendTextMessageAsync(
-                        chatId: _errorChatId,
-                        text: $"{errorMessage}",
-                        cancellationToken: cancellationToken).GetAwaiter();
-                }
-                else
-                {
-                    throw exception;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return Task.CompletedTask;
-        }
+       
     }
 }
